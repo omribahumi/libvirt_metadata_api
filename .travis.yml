@@ -1,9 +1,16 @@
 before_install:
-  - sudo add-apt-repository cloud-archive:havana
+  - sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com EC4926EA
+  - echo "deb http://ubuntu-cloud.archive.canonical.com/ubuntu precise-updates/havana main" | sudo tee -a /etc/apt/sources.list
   - sudo apt-get update -qq
-  - sudo apt-get install libvirt-bin
+  - sudo apt-get install libvirt-bin libvirt-dev python-libvirt
 language: python
 python:
   - "2.7"
-install: "pip install -r requirements.txt"
+
+# libvirt-python==1.2.2 pip package fails to compile on Ubuntu 12.04 with
+# libvirt-dev 1.1.1. As a workaround, I'm installing python-libvirt from APT
+# and excluding it from requirements.txt
+install: "pip install -r <(grep -v libvirt requirements.txt)"
+
 script: nosetests
+
