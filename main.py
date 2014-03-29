@@ -21,7 +21,10 @@ def main():
     application = tornado.web.Application(
         [
             (r"/", handlers.ApiRootHandler),
-            (r"/[^\/]+/meta-data/", handlers.MetadataHandler),
+            (r"/[^\/]+", handlers.NullHandler),  # so we don't return 404 on this
+            (r"/[^\/]+/", handlers.ApiVersionRootHandler),
+            (r"/[^\/]+/meta-data", handlers.NullHandler),
+            (r"/[^\/]+/meta-data/", handlers.MetadataHandler),  # so we don't return 404 on this
             (r"/[^\/]+/meta-data/instance-id", handlers.InstanceIdHandler),
             (r"/[^\/]+/meta-data/local-ipv4", handlers.LocalIpv4Handler),
             (r"/[^\/]+/meta-data/public-ipv4", handlers.PublicIpv4Handler),
