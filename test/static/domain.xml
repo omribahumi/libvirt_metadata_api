@@ -1,0 +1,20 @@
+<domain type="kvm">
+    <metadata>
+        <instance-id>i-12345678</instance-id>
+        <userdata>
+            #cloud-config
+            disable_root: False
+            ssh_pwauth: False
+            manage_etc_hosts: False
+        </userdata>
+        <public-keys>
+            <public-key name="my-public-key2">
+                <key format="openssh-key">ssh-rsa my-public-key2 foo@bar</key>
+                <key format="another-format">a different format</key>
+            </public-key>
+            <public-key name="my-public-key1">
+                <key format="openssh-key">ssh-rsa my-public-key1 foo@bar</key>
+            </public-key>
+        </public-keys>
+    </metadata>
+</domain>
