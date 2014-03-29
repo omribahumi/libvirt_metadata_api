@@ -10,9 +10,11 @@ class ApiBaseHandler(tornado.web.RequestHandler):
 
         assert isinstance(self.request.machine, utils.machine_resolver.Machine)
 
+
 class NullHandler(ApiBaseHandler):
     def get(self):
         pass
+
 
 class ApiRootHandler(ApiBaseHandler):
     def get(self):
