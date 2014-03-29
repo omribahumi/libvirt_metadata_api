@@ -1,3 +1,5 @@
 libvirt-python==1.2.2
 lxml==3.3.3
 tornado==3.2
+mock==1.0.1
+
