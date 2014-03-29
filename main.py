@@ -25,6 +25,9 @@ def main():
             (r"/[^\/]+/meta-data/instance-id", handlers.InstanceIdHandler),
             (r"/[^\/]+/meta-data/local-ipv4", handlers.LocalIpv4Handler),
             (r"/[^\/]+/meta-data/public-ipv4", handlers.PublicIpv4Handler),
+            (r"/[^\/]+/meta-data/public-keys/?", handlers.PublicKeysHandler),
+            (r"/[^\/]+/meta-data/public-keys/(?P<number>\d+)/?", handlers.PublicKeysHandler),
+            (r"/[^\/]+/meta-data/public-keys/(?P<number>\d+)/(?P<key_format>[^/]+)", handlers.PublicKeysHandler),
             (r"/[^\/]+/user-data/?", handlers.UserDataHandler)
         ],
         machine_resolver=utils.machine_resolver.LibvirtMachineResolver(

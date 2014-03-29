@@ -26,6 +26,10 @@ class Machine(object):
     def get_local_ipv4(self):
         pass
 
+    @abc.abstractmethod
+    def get_keys(self):
+        pass
+
 
 class MachineResolver(object):
     __metaclass__ = abc.ABCMeta

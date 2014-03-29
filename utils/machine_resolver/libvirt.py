@@ -1,6 +1,7 @@
 import StringIO
 import lxml.etree
 import utils
+import collections
 from utils.machine_resolver.base import *
 
 
@@ -22,6 +23,12 @@ class LibvirtMachine(Machine):
 
     def get_local_ipv4(self):
         return self.ip
+
+    def get_keys(self):
+        return collections.OrderedDict(
+            [(public_key.attrib['name'], {key.attrib['format']: key.text for key in public_key.findall('./key')})
+             for public_key in self.domain_etree.findall('/metadata/public-keys/public-key')]
+        )
 
 
 class LibvirtMachineResolver(MachineResolver):

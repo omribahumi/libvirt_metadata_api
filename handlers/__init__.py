@@ -25,7 +25,7 @@ class MetadataHandler(ApiBaseHandler):
 
         for urlspec in self.application.handlers[0][1]:
             if '/meta-data/' in urlspec.regex.pattern and not urlspec.regex.pattern.endswith('/meta-data/$'):
-                match = re.search(r'/meta-data/(.+)\$$', urlspec.regex.pattern)
+                match = re.search(r'/meta-data/([^/]+/?)\??\$$', urlspec.regex.pattern)
                 if match:
                     urls.append(match.group(1))
 
@@ -50,3 +50,21 @@ class PublicIpv4Handler(ApiBaseHandler):
 class UserDataHandler(ApiBaseHandler):
     def get(self):
         self.write(self.request.machine.get_userdata())
+
+class PublicKeysHandler(ApiBaseHandler):
+    def get(self, number=None, key_format=None):
+        if not number is None:
+            number = int(number)
+
+        if number is None and key_format is None:
+            keys = ["%d=%s" % (i, key_name) for i, key_name in enumerate(self.request.machine.get_keys())]
+
+            self.write("\n".join(keys))
+        elif key_format is None:
+            key = self.request.machine.get_keys().values()[number]
+
+            self.write("\n".join(key.keys()))
+        else:
+            key = self.request.machine.get_keys().values()[number]
+
+            self.write(key[key_format])
