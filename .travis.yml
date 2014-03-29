@@ -10,7 +10,9 @@ python:
 # libvirt-python==1.2.2 pip package fails to compile on Ubuntu 12.04 with
 # libvirt-dev 1.1.1. As a workaround, I'm installing python-libvirt from APT
 # and excluding it from requirements.txt
-install: "pip install -r <(grep -v libvirt requirements.txt)"
+install:
+  - "pip install -r <(grep -v libvirt requirements.txt)"
+  - "pip install -r test/requirements.txt"
 
-script: nosetests
+script: "nosetests --with-coverage --cover-package=handlers --cover-package=utils"
 
