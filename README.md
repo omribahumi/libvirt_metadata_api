@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/omribahumi/libvirt_metadata_api.svg?branch=master)](https://travis-ci.org/omribahumi/libvirt_metadata_api)
+
 Libvirt Metadata API
 ====================
 
