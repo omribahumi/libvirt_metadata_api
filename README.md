@@ -15,12 +15,17 @@ Example domain XML metadata
 <domain type="kvm">
     <metadata>
         <instance-id>i-12345678</instance-id>
+
+        <!-- note that the userdata's indentation is safe,
+             just indent it as you would normally indent a YAML document.
+             see utils/xml.py for more information -->
         <userdata>
             #cloud-config
             disable_root: False
             ssh_pwauth: False
             manage_etc_hosts: False
         </userdata>
+
         <public-keys>
             <public-key name="my-public-key1">
                 <key format="openssh-key">ssh-rsa my-public-key1 foo@bar</key>
