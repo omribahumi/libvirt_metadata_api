@@ -29,3 +29,4 @@ class ArpTestCase(unittest.TestCase):
     def test_get_mac_address(self):
         with mock.patch('__builtin__.open', mock.mock_open(read_data=self.data)):
             self.assertEqual(utils.arp.get_mac_address('192.168.0.94'), 'aa:aa:aa:aa:aa:aa')
+            self.assertEqual(utils.arp.get_mac_address('1.1.1.1'), None)
