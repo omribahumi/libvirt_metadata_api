@@ -5,6 +5,8 @@ import utils
 
 class ApiBaseHandler(tornado.web.RequestHandler):
     def prepare(self):
+        self.require_setting('machine_resolver')
+
         self.request.machine =\
             self.settings['machine_resolver'].get_machine(self.request.remote_ip)
 
