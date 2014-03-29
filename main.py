@@ -27,7 +27,7 @@ def main():
             (r"/[^\/]+/meta-data/public-ipv4", handlers.PublicIpv4Handler),
             (r"/[^\/]+/user-data/?", handlers.UserDataHandler)
         ],
-        machine_identifier=utils.machine_resolver.LibvirtMachineResolver(
+        machine_resolver=utils.machine_resolver.LibvirtMachineResolver(
             libvirt.openReadOnly(args.libvirt_connection_string))
     )
 

@@ -6,7 +6,7 @@ import utils
 class ApiBaseHandler(tornado.web.RequestHandler):
     def prepare(self):
         self.request.machine =\
-            self.settings['machine_identifier'].get_machine(self.request.remote_ip)
+            self.settings['machine_resolver'].get_machine(self.request.remote_ip)
 
         assert isinstance(self.request.machine, utils.machine_resolver.Machine)
 
