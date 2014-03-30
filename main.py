@@ -19,20 +19,7 @@ def main():
     args = parser.parse_args()
 
     application = tornado.web.Application(
-        [
-            (r"/", handlers.ApiRootHandler),
-            (r"/[^\/]+", handlers.NullHandler),  # so we don't return 404 on this
-            (r"/[^\/]+/", handlers.ApiVersionRootHandler),
-            (r"/[^\/]+/meta-data", handlers.NullHandler),
-            (r"/[^\/]+/meta-data/", handlers.MetadataHandler),  # so we don't return 404 on this
-            (r"/[^\/]+/meta-data/instance-id", handlers.InstanceIdHandler),
-            (r"/[^\/]+/meta-data/local-ipv4", handlers.LocalIpv4Handler),
-            (r"/[^\/]+/meta-data/public-ipv4", handlers.PublicIpv4Handler),
-            (r"/[^\/]+/meta-data/public-keys/?", handlers.PublicKeysHandler),
-            (r"/[^\/]+/meta-data/public-keys/(?P<number>\d+)/?", handlers.PublicKeysHandler),
-            (r"/[^\/]+/meta-data/public-keys/(?P<number>\d+)/(?P<key_format>[^/]+)", handlers.PublicKeysHandler),
-            (r"/[^\/]+/user-data/?", handlers.UserDataHandler)
-        ],
+        handlers.routes,
         machine_resolver=utils.machine_resolver.LibvirtMachineResolver(
             libvirt.openReadOnly(args.libvirt_connection_string))
     )

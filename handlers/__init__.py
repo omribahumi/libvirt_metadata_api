@@ -162,3 +162,17 @@ class PublicKeysHandler(ApiBaseHandler):
             key = self.request.machine.get_keys().values()[number]
 
             self.write(key[key_format])
+
+
+routes = [(r"/", ApiRootHandler),
+          (r"/[^\/]+", NullHandler),  # so we don't return 404 on this
+          (r"/[^\/]+/", ApiVersionRootHandler),
+          (r"/[^\/]+/meta-data", NullHandler),
+          (r"/[^\/]+/meta-data/", MetadataHandler),  # so we don't return 404 on this
+          (r"/[^\/]+/meta-data/instance-id", InstanceIdHandler),
+          (r"/[^\/]+/meta-data/local-ipv4", LocalIpv4Handler),
+          (r"/[^\/]+/meta-data/public-ipv4", PublicIpv4Handler),
+          (r"/[^\/]+/meta-data/public-keys/?", PublicKeysHandler),
+          (r"/[^\/]+/meta-data/public-keys/(?P<number>\d+)/?", PublicKeysHandler),
+          (r"/[^\/]+/meta-data/public-keys/(?P<number>\d+)/(?P<key_format>[^/]+)", PublicKeysHandler),
+          (r"/[^\/]+/user-data/?", UserDataHandler)]
