@@ -61,6 +61,7 @@ Known issues
 ------------
 
 * NAT network interface is not supported, since you can't tell from which domain (machine) the packet originated
+* `libvirt-python` pip package fails to compile on Ubuntu 12.04. See above
 
 Troubleshooting
 ---------------
