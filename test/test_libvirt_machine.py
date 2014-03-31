@@ -5,7 +5,7 @@ import lxml.etree
 
 class LibvirtMachineTestCase(unittest.TestCase):
     def setUp(self):
-        self.machine = utils.machine_resolver.LibvirtMachine('192.168.0.1', lxml.etree.parse(open('test/static/domain.xml')))
+        self.machine = utils.machine_resolver.LibvirtMachine('192.168.0.1', lxml.etree.parse(open('test/static/metadata_domain.xml')))
 
     def test_instance_id(self):
         self.assertEqual(self.machine.get_instance_id(), 'i-12345678')

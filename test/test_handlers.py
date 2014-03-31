@@ -7,7 +7,7 @@ import lxml.etree
 class MockMachineResolver(utils.machine_resolver.MachineResolver):
     def get_machine(self, ip):
         assert ip == "127.0.0.1"
-        return utils.machine_resolver.LibvirtMachine('192.168.0.1', lxml.etree.parse(open('test/static/domain.xml')))
+        return utils.machine_resolver.LibvirtMachine('192.168.0.1', lxml.etree.parse(open('test/static/metadata_domain.xml')))
 
 
 class MyHTTPTest(tornado.testing.AsyncHTTPTestCase):

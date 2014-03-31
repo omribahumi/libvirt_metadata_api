@@ -21,7 +21,7 @@ class Machine(object):
         :rtype: str
         """
 
-        pass
+        raise NotImplementedError
 
     @abc.abstractmethod
     def get_instance_id(self):
@@ -30,7 +30,7 @@ class Machine(object):
         :rtype: str
         """
 
-        pass
+        raise NotImplementedError
 
     @abc.abstractmethod
     def get_public_ipv4(self):
@@ -39,7 +39,7 @@ class Machine(object):
         :rtype: str
         """
 
-        pass
+        raise NotImplementedError
 
     @abc.abstractmethod
     def get_local_ipv4(self):
@@ -48,7 +48,7 @@ class Machine(object):
         :rtype: str
         """
 
-        pass
+        raise NotImplementedError
 
     @abc.abstractmethod
     def get_keys(self):
@@ -57,7 +57,7 @@ class Machine(object):
         :rtype: collections.OrderedDict {'key_name': {'key_format': 'value', ...}, ...}
         """
 
-        pass
+        raise NotImplementedError
 
 
 class MachineResolver(object):
@@ -72,4 +72,4 @@ class MachineResolver(object):
         :rtype: Machine
         """
 
-        pass
+        raise NotImplementedError
