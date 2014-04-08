@@ -42,13 +42,14 @@ Example domain XML metadata
 My setup
 --------
 
-This project has been tested on Ubuntu Precise (12.04) with libvirt 1.1.1 from the [CloudArchive Havana repository](https://wiki.ubuntu.com/ServerTeam/CloudArchive).  
+This project has been tested on Ubuntu Precise (12.04) with `libvirt` 1.1.1 from the [CloudArchive Havana repository](https://wiki.ubuntu.com/ServerTeam/CloudArchive).  
 I use KVM with QEMU as my virtualization layer with a bridged interface for networking.  
 I've tested it with [Precise 64bits Ubuntu cloud images](http://cloud-images.ubuntu.com/precise/current/)
-I should mention that I failed building it inside a virtualenv - apparently because `libvirt` 1.1.1 wasn't compiled with LXC support. I didn't have the time to debug this further.  
-In the mean time, you can use the `python-libvirt` apt package instead.
 
 After taking care of all the requirements, you can just run it using `./main.py`
+
+> As of this writing, there's an [open bug](https://bugs.launchpad.net/ubuntu/+source/libvirt/+bug/1287232) for `libvirt` 1.1.1 from the Havana repository. The bug causes the pip installation of `libvirt-python` to fail. To work around it, simply run `sudo ln -s libvirt-lxc.so.0.1001.1 /usr/lib/libvirt-lxc.so`.  
+
 
 Setting up iptables
 -------------------
