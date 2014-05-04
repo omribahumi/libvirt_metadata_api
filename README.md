@@ -55,7 +55,7 @@ Setting up iptables
 -------------------
 
 Because we need to "hijack" traffic to the metadata API IP address `169.254.169.254`, we're going to redirect this traffic to `localhost` using IPtables:  
-`iptables -t nat -A OUTPUT -d 169.254.169.254 -p tcp --dport 80 --syn -j REDIRECT --to-port 1024`  
+`iptables -t nat -A PREROUTING -d 169.254.169.254 -p tcp --dport 80 --syn -j REDIRECT --to-port 1024`  
 Don't forget to persist this iptables rule across reboots with some sort of script (`iptables-persistent` apt package is a good candidate)
 
 Known issues
