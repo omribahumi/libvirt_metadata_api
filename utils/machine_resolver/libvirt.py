@@ -26,7 +26,7 @@ class LibvirtMachine(Machine):
 
     def get_placement_availability_zone(self):
         element = self.domain_etree.find('/metadata/placement/availability-zone')
-        return element.text if element else ''
+        return element.text if element is not None else ''
 
     def get_keys(self):
         """
