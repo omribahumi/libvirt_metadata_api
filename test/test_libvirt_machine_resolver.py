@@ -3,6 +3,7 @@ import utils
 import lxml.etree
 import mock
 
+
 class MockLibvirtDomain(object):
     def __init__(self, xml):
         self.xml = xml
@@ -11,6 +12,7 @@ class MockLibvirtDomain(object):
         assert flags == 0
 
         return self.xml
+
 
 class MockLibvirt(object):
     def listDomainsID(self):
