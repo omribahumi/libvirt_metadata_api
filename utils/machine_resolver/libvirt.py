@@ -24,6 +24,10 @@ class LibvirtMachine(Machine):
     def get_local_ipv4(self):
         return self.ip
 
+    def get_placement_availability_zone(self):
+        element = self.domain_etree.find('/metadata/placement/availability-zone')
+        return element.text if element else ''
+
     def get_keys(self):
         """
         Example metadata:

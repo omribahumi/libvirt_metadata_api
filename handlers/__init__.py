@@ -116,6 +116,22 @@ class PublicIpv4Handler(ApiBaseHandler):
         self.write(self.request.machine.get_public_ipv4())
 
 
+class PlacementAvailabilityZoneHandler(ApiBaseHandler):
+    """
+    Handles calls to:
+        /<version>/meta-data/placement
+        /<version>/meta-data/placement/availability-zone
+
+    Returns the placement availability zone as returned by the Machine object
+    """
+
+    def get(self, what=None):
+        if what == 'availability-zone':
+            self.write(self.request.machine.get_placement_availability_zone())
+        else:
+            self.write('availability-zone')
+
+
 class UserDataHandler(ApiBaseHandler):
     """
     Handles calls to:
@@ -172,6 +188,8 @@ routes = [(r"/", ApiRootHandler),
           (r"/[^\/]+/meta-data/instance-id", InstanceIdHandler),
           (r"/[^\/]+/meta-data/local-ipv4", LocalIpv4Handler),
           (r"/[^\/]+/meta-data/public-ipv4", PublicIpv4Handler),
+          (r"/[^\/]+/meta-data/placement/?", PlacementAvailabilityZoneHandler),
+          (r"/[^\/]+/meta-data/placement/(availability-zone)", PlacementAvailabilityZoneHandler),
           (r"/[^\/]+/meta-data/public-keys/?", PublicKeysHandler),
           (r"/[^\/]+/meta-data/public-keys/(?P<number>\d+)/?", PublicKeysHandler),
           (r"/[^\/]+/meta-data/public-keys/(?P<number>\d+)/(?P<key_format>[^/]+)", PublicKeysHandler),

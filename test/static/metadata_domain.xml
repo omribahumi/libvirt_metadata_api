@@ -10,6 +10,9 @@
               indentation:
                 levels: are cool
         ]]></userdata>
+        <placement>
+            <availability-zone>us-east-1a</availability-zone>
+        </placement>
         <public-keys>
             <public-key name="my-public-key2">
                 <key format="openssh-key">ssh-rsa my-public-key2 foo@bar</key>

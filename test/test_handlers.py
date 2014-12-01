@@ -42,7 +42,7 @@ class MyHTTPTest(tornado.testing.AsyncHTTPTestCase):
         self.assertEqual(response.body, '')
 
         response = self.get('/latest/meta-data/')
-        self.assertListEqual(response.body.split("\n"), ['instance-id', 'local-ipv4', 'public-ipv4', 'public-keys/'])
+        self.assertListEqual(response.body.split("\n"), ['instance-id', 'local-ipv4', 'public-ipv4', 'placement/', 'public-keys/'])
 
     def test_metadata_instance_id(self):
         machine = self.get_app().settings['machine_resolver'].get_machine('127.0.0.1')
@@ -61,6 +61,15 @@ class MyHTTPTest(tornado.testing.AsyncHTTPTestCase):
         response = self.get('/latest/meta-data/local-ipv4')
 
         self.assertEqual(response.body, machine.get_local_ipv4())
+
+    def test_metadata_placement_availability_zone(self):
+        machine = self.get_app().settings['machine_resolver'].get_machine('127.0.0.1')
+
+        response = self.get('/latest/meta-data/placement')
+        self.assertListEqual(response.body.split("\n"), ["availability-zone"])
+
+        response = self.get('/latest/meta-data/placement/availability-zone')
+        self.assertEqual(machine.get_placement_availability_zone(), response.body)
 
     def test_metadata_public_keys(self):
         machine = self.get_app().settings['machine_resolver'].get_machine('127.0.0.1')
