@@ -3,9 +3,6 @@ before_install:
   - echo "deb http://ubuntu-cloud.archive.canonical.com/ubuntu precise-updates/havana main" | sudo tee -a /etc/apt/sources.list
   - sudo apt-get update -qq
   - sudo apt-get install libvirt-bin libvirt-dev
-  
-  # workaround https://bugs.launchpad.net/ubuntu/+source/libvirt/+bug/1287232
-  - sudo ln -s libvirt-lxc.so.0.1001.1 /usr/lib/libvirt-lxc.so
 language: python
 python:
   - "2.7"
