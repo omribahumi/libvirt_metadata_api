@@ -1,0 +1,22 @@
+<domain type="kvm">
+    <metadata>
+        <instance-id>i-12345678</instance-id>
+        <userdata encoding="base64">
+            I2Nsb3VkLWNvbmZpZwpkaXNhYmxlX3Jvb3Q6IEZhbHNlCnNzaF9wd2F1dGg6IEZhbHNl
+            Cm1hbmFnZV9ldGNfaG9zdHM6IEZhbHNlCm11bHRpcGxlOgogIGluZGVudGF0aW9uOgog
+            ICAgbGV2ZWxzOiBhcmUgY29vbA==
+        </userdata>
+        <placement>
+            <availability-zone>us-east-1a</availability-zone>
+        </placement>
+        <public-keys>
+            <public-key name="my-public-key2">
+                <key format="openssh-key">ssh-rsa my-public-key2 foo@bar</key>
+                <key format="another-format">a different format</key>
+            </public-key>
+            <public-key name="my-public-key1">
+                <key format="openssh-key">ssh-rsa my-public-key1 foo@bar</key>
+            </public-key>
+        </public-keys>
+    </metadata>
+</domain>

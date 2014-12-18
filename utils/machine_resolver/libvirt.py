@@ -2,6 +2,7 @@ import StringIO
 import lxml.etree
 import utils
 import collections
+import base64
 from utils.machine_resolver.base import *
 
 __all__ = ['LibvirtMachine', 'LibvirtMachineResolver']
@@ -13,7 +14,18 @@ class LibvirtMachine(Machine):
         self.domain_etree = domain_etree
 
     def get_userdata(self):
-        return utils.xml.fix_indent(self.domain_etree.find('/metadata/userdata').text)
+        userdata_element = self.domain_etree.find('/metadata/userdata')
+
+        if 'encoding' in userdata_element.attrib:
+            if userdata_element.attrib['encoding'] == 'base64':
+                userdata = base64.b64decode(userdata_element.text)
+            else:
+                raise MachineResolverException("Unsupported encoding for userdata: %r" %
+                                               (userdata_element.attrib['encoding']))
+        else:
+            userdata = utils.xml.fix_indent(userdata_element.text)
+
+        return userdata
 
     def get_instance_id(self):
         return self.domain_etree.find('/metadata/instance-id').text

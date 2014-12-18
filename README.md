@@ -20,7 +20,9 @@ Example domain XML metadata
 
         <!-- note that the userdata's indentation is safe,
              just indent it as you would normally indent a YAML document.
-             see utils/xml.py for more information -->
+             see utils/xml.py for more information. You can also specify
+             encoding="base64" as an attribute to the userdata tag and
+             have the userdata formatted in base64 -->
         <userdata>
             #cloud-config
             disable_root: False

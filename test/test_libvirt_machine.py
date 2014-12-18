@@ -3,9 +3,21 @@ import utils
 import lxml.etree
 
 
+class LibvirtMachineBase64UserdataTestCase(unittest.TestCase):
+    def setUp(self):
+        self.machine = utils.machine_resolver.LibvirtMachine('192.168.0.1', lxml.etree.parse(open(
+                                                                            'test/static/base64_userdata_domain.xml')))
+
+    def test_userdata(self):
+        self.assertEqual(self.machine.get_userdata(),
+                         "#cloud-config\ndisable_root: False\nssh_pwauth: False\nmanage_etc_hosts: False\n"
+                         "multiple:\n  indentation:\n    levels: are cool")
+
+
 class LibvirtMachineTestCase(unittest.TestCase):
     def setUp(self):
-        self.machine = utils.machine_resolver.LibvirtMachine('192.168.0.1', lxml.etree.parse(open('test/static/metadata_domain.xml')))
+        self.machine = utils.machine_resolver.LibvirtMachine('192.168.0.1',
+                                                             lxml.etree.parse(open('test/static/metadata_domain.xml')))
 
     def test_instance_id(self):
         self.assertEqual(self.machine.get_instance_id(), 'i-12345678')
@@ -20,7 +32,9 @@ class LibvirtMachineTestCase(unittest.TestCase):
         self.assertEqual(self.machine.get_placement_availability_zone(), 'us-east-1a')
 
     def test_userdata(self):
-        self.assertEqual(self.machine.get_userdata(), """#cloud-config\ndisable_root: False\nssh_pwauth: False\nmanage_etc_hosts: False\nmultiple:\n  indentation:\n    levels: are cool""")
+        self.assertEqual(self.machine.get_userdata(),
+                         "#cloud-config\ndisable_root: False\nssh_pwauth: False\nmanage_etc_hosts: False\n"
+                         "multiple:\n  indentation:\n    levels: are cool")
 
     def test_keys(self):
         keys = self.machine.get_keys()
