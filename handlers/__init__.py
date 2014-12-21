@@ -54,10 +54,10 @@ class ApiVersionRootHandler(ApiBaseHandler):
     Lists supported APIs
     """
 
-    def get(self):
-        apis = ['meta-data', 'user-data']
+    apis = ['meta-data', 'user-data']
 
-        self.write("\n".join(apis))
+    def get(self):
+        self.write("\n".join(ApiVersionRootHandler.apis))
 
 
 class MetadataHandler(ApiBaseHandler):
@@ -143,6 +143,7 @@ class UserDataHandler(ApiBaseHandler):
 
     def get(self):
         self.write(self.request.machine.get_userdata())
+
 
 class PublicKeysHandler(ApiBaseHandler):
     """

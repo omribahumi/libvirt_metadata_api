@@ -59,6 +59,13 @@ class Machine(object):
 
         raise NotImplementedError
 
+    @abc.abstractmethod
+    def get_additional_metadata(self):
+        """
+        :return: object (usually decoded from JSON) with extra data
+        """
+
+        raise NotImplementedError
 
 class MachineResolver(object):
     __metaclass__ = abc.ABCMeta

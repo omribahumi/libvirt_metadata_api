@@ -10,6 +10,9 @@
               indentation:
                 levels: are cool
         ]]></userdata>
+        <additional>
+            {"tags": ["tag_a", "tag_b", "tag_c"]}
+        </additional>
         <placement>
             <availability-zone>us-east-1a</availability-zone>
         </placement>

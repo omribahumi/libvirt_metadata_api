@@ -3,6 +3,7 @@ import lxml.etree
 import utils
 import collections
 import base64
+import json
 from utils.machine_resolver.base import *
 
 __all__ = ['LibvirtMachine', 'LibvirtMachineResolver']
@@ -60,6 +61,11 @@ class LibvirtMachine(Machine):
             [(public_key.attrib['name'], {key.attrib['format']: key.text for key in public_key.findall('./key')})
              for public_key in self.domain_etree.findall('/metadata/public-keys/public-key')]
         )
+
+    def get_additional_metadata(self):
+        element = self.domain_etree.find('/metadata/additional')
+
+        return json.loads(element.text) if element is not None else None
 
 
 class LibvirtMachineResolver(MachineResolver):

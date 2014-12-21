@@ -10,7 +10,7 @@ class MockMachineResolver(utils.machine_resolver.MachineResolver):
         return utils.machine_resolver.LibvirtMachine('192.168.0.1', lxml.etree.parse(open('test/static/metadata_domain.xml')))
 
 
-class MyHTTPTest(tornado.testing.AsyncHTTPTestCase):
+class HttpTest(tornado.testing.AsyncHTTPTestCase):
     def get_app(self):
         return tornado.web.Application(
             handlers.routes,
