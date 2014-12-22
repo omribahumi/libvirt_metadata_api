@@ -77,7 +77,7 @@ class LibvirtMachine(Machine):
 
 
 class LibvirtMachineResolver(MachineResolver):
-    def __init__(self, connection, load_edited_domain_xml):
+    def __init__(self, connection, load_edited_domain_xml=False):
         self.connection = connection
 
         if load_edited_domain_xml:
