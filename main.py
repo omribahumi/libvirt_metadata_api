@@ -16,6 +16,9 @@ def main():
     parser.add_argument('-p', '--port', type=int, default=1024)
     parser.add_argument('-c', '--connect', dest='libvirt_connection_string', default='qemu:///system')
     parser.add_argument('--enable-xheaders', default=False, action='store_true')
+    parser.add_argument('--load-edited-domain-xml', default=False, action='store_true',
+                        help='Use this flag to make changes to Domain XML to be reflected immediately (opposed ' +
+                        'to requiring a restart of the domain)')
     parser.add_argument('--plugin', action='append', help='Load this plugin. This simply imports the module. ' +
                                                           'See example for more details')
     args = parser.parse_args()
@@ -27,7 +30,8 @@ def main():
     application = tornado.web.Application(
         handlers.routes,
         machine_resolver=utils.machine_resolver.LibvirtMachineResolver(
-            libvirt.openReadOnly(args.libvirt_connection_string))
+            libvirt.openReadOnly(args.libvirt_connection_string),
+            args.load_edited_domain_xml)
     )
 
     http_server = tornado.httpserver.HTTPServer(application)

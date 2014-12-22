@@ -4,6 +4,7 @@ import utils
 import collections
 import base64
 import json
+import libvirt
 from utils.machine_resolver.base import *
 
 __all__ = ['LibvirtMachine', 'LibvirtMachineResolver']
@@ -72,8 +73,13 @@ class LibvirtMachine(Machine):
 
 
 class LibvirtMachineResolver(MachineResolver):
-    def __init__(self, connection):
+    def __init__(self, connection, load_edited_domain_xml):
         self.connection = connection
+
+        if load_edited_domain_xml:
+            self.xmldesc_flags = libvirt.VIR_DOMAIN_XML_INACTIVE
+        else:
+            self.xmldesc_flags = 0
 
     def get_domain_etree_by_id(self, domain_id):
         """
@@ -86,7 +92,7 @@ class LibvirtMachineResolver(MachineResolver):
         """
 
         domain = self.connection.lookupByID(domain_id)
-        domain_etree = lxml.etree.parse(StringIO.StringIO(domain.XMLDesc(0)))
+        domain_etree = lxml.etree.parse(StringIO.StringIO(domain.XMLDesc(self.xmldesc_flags)))
 
         return domain_etree
 
