@@ -42,13 +42,19 @@ class HttpTest(tornado.testing.AsyncHTTPTestCase):
         self.assertEqual(response.body, '')
 
         response = self.get('/latest/meta-data/')
-        self.assertListEqual(response.body.split("\n"), ['instance-id', 'local-ipv4', 'public-ipv4', 'placement/', 'public-keys/'])
+        self.assertListEqual(response.body.split("\n"), ['instance-id', 'instance-type', 'local-ipv4', 'public-ipv4', 'placement/', 'public-keys/'])
 
     def test_metadata_instance_id(self):
         machine = self.get_app().settings['machine_resolver'].get_machine('127.0.0.1')
         response = self.get('/latest/meta-data/instance-id')
 
         self.assertEqual(response.body, machine.get_instance_id())
+
+    def test_metadata_instance_type(self):
+        machine = self.get_app().settings['machine_resolver'].get_machine('127.0.0.1')
+        response = self.get('/latest/meta-data/instance-type')
+
+        self.assertEqual(response.body, machine.get_instance_type())
 
     def test_metadata_public_ip(self):
         machine = self.get_app().settings['machine_resolver'].get_machine('127.0.0.1')

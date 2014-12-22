@@ -1,6 +1,7 @@
 <domain type="kvm">
     <metadata>
         <instance-id>i-12345678</instance-id>
+        <instance-type>c3.large</instance-type>
         <userdata><![CDATA[
             #cloud-config
             disable_root: False

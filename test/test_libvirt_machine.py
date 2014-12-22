@@ -22,6 +22,9 @@ class LibvirtMachineTestCase(unittest.TestCase):
     def test_instance_id(self):
         self.assertEqual(self.machine.get_instance_id(), 'i-12345678')
 
+    def test_instance_type(self):
+        self.assertEqual(self.machine.get_instance_type(), 'c3.large')
+
     def test_public_ipv4(self):
         self.assertEqual(self.machine.get_public_ipv4(), '192.168.0.1')
 

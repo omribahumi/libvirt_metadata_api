@@ -92,6 +92,18 @@ class InstanceIdHandler(ApiBaseHandler):
         self.write(self.request.machine.get_instance_id())
 
 
+class InstanceTypeHandler(ApiBaseHandler):
+    """
+    Handles calls to:
+        /<version>/meta-data/instance-type
+
+    Returns the instance-type as returned by the Machine object
+    """
+
+    def get(self):
+        self.write(self.request.machine.get_instance_type())
+
+
 class LocalIpv4Handler(ApiBaseHandler):
     """
     Handles calls to:
@@ -187,6 +199,7 @@ routes = [(r"/", ApiRootHandler),
           (r"/[^\/]+/meta-data", NullHandler),
           (r"/[^\/]+/meta-data/", MetadataHandler),  # so we don't return 404 on this
           (r"/[^\/]+/meta-data/instance-id", InstanceIdHandler),
+          (r"/[^\/]+/meta-data/instance-type", InstanceTypeHandler),
           (r"/[^\/]+/meta-data/local-ipv4", LocalIpv4Handler),
           (r"/[^\/]+/meta-data/public-ipv4", PublicIpv4Handler),
           (r"/[^\/]+/meta-data/placement/?", PlacementAvailabilityZoneHandler),

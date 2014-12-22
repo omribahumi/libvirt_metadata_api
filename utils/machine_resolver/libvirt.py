@@ -31,6 +31,9 @@ class LibvirtMachine(Machine):
     def get_instance_id(self):
         return self.domain_etree.find('/metadata/instance-id').text
 
+    def get_instance_type(self):
+        return self.domain_etree.find('/metadata/instance-type').text
+
     def get_public_ipv4(self):
         return self.ip
 
