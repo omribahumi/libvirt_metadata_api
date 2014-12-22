@@ -9,6 +9,10 @@ from utils.machine_resolver.base import *
 
 __all__ = ['LibvirtMachine', 'LibvirtMachineResolver']
 
+# apparently some versions of libvirt don't have this. yay.
+if not hasattr(libvirt, 'VIR_DOMAIN_XML_INACTIVE'):
+    libvirt.VIR_DOMAIN_XML_INACTIVE = 2
+
 
 class LibvirtMachine(Machine):
     def __init__(self, ip, domain_etree):
